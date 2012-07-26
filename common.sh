@@ -33,9 +33,8 @@ appendMsgTo1stLine()
 extractTicketId()
 {
     echo "$(getGitBranchName)" \
-    | awk 'BEGIN{ FS="[/]"}
-           $1 == "id" { printf "refs #%s", $2 }
-           $2 == "id" { printf "refs #%s", $3 }'
+    | awk 'BEGIN{ FS="[-]"}
+           $1 == "ticket" && $2 ~ /^[0-9]+$/ { printf "refs #%s", $2 }'
 }
 
 hasTicketId()
